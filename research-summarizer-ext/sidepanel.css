@@ -1,129 +1,176 @@
 body {
     margin: 0;
-    padding: 20px;
+    padding: 15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f7;
-    color: #333;
+    background: linear-gradient(135deg, #0f0c29, #1a1a2e, #16213e);
+    background-size: 200% 200%;
+    animation: gradientBackground 10s ease infinite;
+    color: #fff;
+    overflow: hidden;
+}
+
+@keyframes gradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    max-width: 600px;
-    margin: 0 auto;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .header {
-    padding-bottom: 15px;
-    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .header h2 {
     margin: 0;
-    color: #1a73e8;
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
+    font-size: 28px;
+    font-weight: 700;
+    color: transparent;
+    background: linear-gradient(45deg, #00b4db, #0083b0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradientText 5s infinite alternate;
+}
+
+@keyframes gradientText {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 .actions {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
 button {
     padding: 10px 20px;
-    background-color: #1a73e8;
+    background: linear-gradient(45deg, #00b4db, #0083b0);
     color: white;
+    border: none;
     border-radius: 8px;
     cursor: pointer;
-    border: none;
     font-size: 14px;
     font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
 }
 
 button:hover {
-    background-color: #1557b0;
-    transform: translateY(-2px);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 180, 219, 0.5);
+}
+
+button:hover::after {
+    transform: translate(-50%, -50%) scale(1);
 }
 
 button:active {
-    transform: translateY(0);
+    transform: scale(0.95);
 }
 
 .notes textarea {
     width: 100%;
     height: 200px;
     padding: 12px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     resize: vertical;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 14px;
     line-height: 1.5;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    transition: all 0.3s ease;
 }
 
 .notes textarea:focus {
-    border-color: #1a73e8;
-    box-shadow: 0 2px 8px rgba(26, 115, 232, 0.2);
+    border-color: #00b4db;
+    box-shadow: 0 0 10px rgba(0, 180, 219, 0.5);
     outline: none;
+    transform: scale(1.02);
 }
 
 #results {
     padding: 15px;
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     margin-top: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    line-height: 1.6;
-    color: #333;
-    border: 1px solid #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: glow 2s infinite alternate;
 }
 
-/* Add a subtle animation for the results section */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+@keyframes glow {
+    0% {
+        box-shadow: 0 4px 12px rgba(0, 180, 219, 0.3);
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    100% {
+        box-shadow: 0 4px 20px rgba(0, 180, 219, 0.6);
     }
 }
 
-#results {
-    animation: fadeIn 0.5s ease;
+.result-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
-/* Add a smooth transition for the container */
-.container {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 0.5s ease forwards;
+.result-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 180, 219, 0.4);
 }
 
-/* Add a hover effect for buttons */
-button.secondary {
-    background-color: transparent;
-    color: #1a73e8;
-    border: 1px solid #1a73e8;
-}
-
-button.secondary:hover {
-    background-color: rgba(26, 115, 232, 0.1);
-}
-
-/* Add a subtle gradient to the header */
-.header {
-    background: linear-gradient(90deg, #1a73e8, #6c8ef2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.result-content {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: #fff;
 }
